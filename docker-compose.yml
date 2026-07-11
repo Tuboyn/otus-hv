@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    container_name: survey-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - survey-network
+
+  frontend:
+    build: ./frontend
+    container_name: survey-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - survey-network
+
+networks:
+  survey-network:
+    driver: bridge
